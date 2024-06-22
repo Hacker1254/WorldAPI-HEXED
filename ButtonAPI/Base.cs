@@ -29,8 +29,6 @@ public class APIBase {
         Logs.Error($"The ButtonAPI had an Error At {str}", er);
     });
 
-    private static int HasChecked = -1;
-
     public static Sprite DefaultButtonSprite; // Override these if u want custom ones
     public static Sprite OffSprite, OnSprite; // Override these if u want custom ones
     public static GameObject QuickMenu, ColpButtonGrp, ButtonGrp, ButtonGrpText;
@@ -42,83 +40,40 @@ public class APIBase {
 
     internal static Transform UserInterface => VRCUiManager.field_Private_Static_VRCUiManager_0?.transform;
 
-
+    static bool HasChecked;
     public static bool IsReady() {
-        if (HasChecked == 1) return true; // Check and good
-        else if (HasChecked == 0) return false; // Check and Bad
-        HasChecked = 1; // Return true
+        if (HasChecked) return true; // Check and good
 
+        if ((QuickMenu = UserInterface.Find("Canvas_QuickMenu(Clone)")?.gameObject) == null) throw new NullReferenceException("QuickMenu Is Null!");
 
+        if ((Button = QuickMenu?.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_Respawn")) == null) throw new NullReferenceException("Button Is Null!");
+        if ((MenuPage = QuickMenu?.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Dashboard")) == null) throw new NullReferenceException("MenuTab Is Null!");
+        if ((Tab = QuickMenu?.transform.Find("CanvasGroup/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_DevTools")) == null) throw new NullReferenceException("Tab Is Null!");
+        if ((ButtonGrp = QuickMenu?.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions")?.gameObject) == null) 
+            throw new NullReferenceException("ButtonGrp Is Null!");
+        if ((ButtonGrpText = QuickMenu?.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickActions")?.gameObject) == null) 
+            throw new NullReferenceException("ButtonGrpText Is Null!");
+        if ((ColpButtonGrp = QuickMenu?.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_QM_GeneralSettings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/YourAvatar")?.gameObject) == null) 
+            throw new NullReferenceException("ColpButtonGrp Is Null!");
+        if ((Slider = QuickMenu?.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_QM_GeneralSettings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/DisplayAndVisualAdjustments/QM_Settings_Panel/VerticalLayoutGroup/ScreenBrightness")) == null)
+            throw new NullReferenceException("Slider Is Null!");
 
-        if ((QuickMenu = UserInterface.Find("Canvas_QuickMenu(Clone)")?.gameObject) == null) {
-            Logs.Error("QuickMenu Is Null!");
-            return false; // return false
-        }
-
-        if ((MMM = UserInterface.Find("Canvas_MainMenu(Clone)")?.gameObject) == null) {
-            Logs.Error("MainMenu Is Null!"); 
-            return false;
-        }
-        if ((Button = QuickMenu?.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_Respawn")) == null) {
-            Logs.Error("Button Is Null!");
-            return false;
-        }
-        if ((Slider = QuickMenu?.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_QM_GeneralSettings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/DisplayAndVisualAdjustments/QM_Settings_Panel/VerticalLayoutGroup/ScreenBrightness")) == null) {
-            Logs.Error("Slider Is Null!");
-            return false; 
-        }
-        if ((MenuPage = QuickMenu?.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Dashboard")) == null) {
-            Logs.Error("MenuTab Is Null!");
-            return false; 
-        }
-        if ((Tab = QuickMenu?.transform.Find("CanvasGroup/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_DevTools")) == null) {
-            Logs.Error("Tab Is Null!");
-            return false; 
-        }
-        if ((ButtonGrp = QuickMenu?.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions")?.gameObject) == null) {
-            Logs.Error("ButtonGrp Is Null!");
-            return false; 
-        }
-        if ((ButtonGrpText = QuickMenu?.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickActions")?.gameObject) == null) {
-            Logs.Error("ButtonGrpText Is Null!");
-            return false; 
-        }
-        if ((ColpButtonGrp = QuickMenu?.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_QM_GeneralSettings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/YourAvatar")?.gameObject) == null) {
-            Logs.Error("ColpButtonGrp Is Null!");
-            return false; 
-        }
-
-
-        if ((MMMpageTemplate = MMM?.transform.Find("Container/MMParent/Menu_MM_Profile")?.gameObject) == null) {
-            Logs.Error("Main Menu Template Is Null!");
-            return false; 
-        }
-
-        if ((MMMCarouselPageTemplate = MMM?.transform.Find("Container/MMParent/Menu_Settings")?.gameObject) == null) {
-            Logs.Error("Menu_Settings Is Null!");
-            return false; 
-        }
-        if ((MMMTabTemplate = MMM?.transform.Find("Container/PageButtons/HorizontalLayoutGroup/Page_Profile")?.gameObject) == null) {
-            Logs.Error("Main Menu Tab Is Null!");
-            return false; 
-        }
-        if ((MMMCarouselButtonTemplate = MMM?.transform.Find("Container/MMParent/Menu_Settings/Menu_MM_DynamicSidePanel/Panel_SectionList/ScrollRect_Navigation_Container/ScrollRect_Navigation/Viewport/VerticalLayoutGroup/Cell_MM_Audio & Voice")?.gameObject) == null) {
-            Logs.Error("MMMCarouselButtonTemplate Is Null!");
-            return false; 
-        }
-        if ((MMBtnGRP = MMM?.transform.Find("Container/MMParent/Menu_Settings/Menu_MM_DynamicSidePanel/Panel_SectionList/ScrollRect_Navigation_Container/ScrollRect_Content/Viewport/VerticalLayoutGroup/Debug/ManageCachedData")?.gameObject) == null) {
-            Logs.Error("MMBtnGRP Is Null!");
-            return false; 
-        }
-        if ((MMCTgl = MMM?.transform.Find("Container/MMParent/Menu_Settings/Menu_MM_DynamicSidePanel/Panel_SectionList/ScrollRect_Navigation_Container/ScrollRect_Content/Viewport/VerticalLayoutGroup/Mirrors/PersonalMirror/Settings_Panel_1/VerticalLayoutGroup/PersonalMirror")?.gameObject) == null) {
-            Logs.Error("MMCTgl Is Null!");
-            return false; 
-        }
-        if (!GetToglSprites()) HasChecked = 0;
-        return HasChecked != 0;
+        if ((MMM = UserInterface.Find("Canvas_MainMenu(Clone)")?.gameObject) == null) throw new NullReferenceException("MainMenu Is Null!");
+        if ((MMMpageTemplate = MMM?.transform.Find("Container/MMParent/Menu_MM_Profile")?.gameObject) == null) throw new NullReferenceException("Main Menu Template Is Null!");
+        if ((MMMCarouselPageTemplate = MMM?.transform.Find("Container/MMParent/Menu_Settings")?.gameObject) == null) throw new NullReferenceException("Menu_Settings Is Null!");
+        if ((MMMTabTemplate = MMM?.transform.Find("Container/PageButtons/HorizontalLayoutGroup/Page_Profile")?.gameObject) == null) throw new NullReferenceException("Main Menu Tab Is Null!");
+        if ((MMMCarouselButtonTemplate = MMM?.transform.Find("Container/MMParent/Menu_Settings/Menu_MM_DynamicSidePanel/Panel_SectionList/ScrollRect_Navigation_Container/ScrollRect_Navigation/Viewport/VerticalLayoutGroup/Cell_MM_Audio & Voice")?.gameObject) == null)
+            throw new NullReferenceException("MMMCarouselButtonTemplate Is Null!");
+        if ((MMBtnGRP = MMM?.transform.Find("Container/MMParent/Menu_Settings/Menu_MM_DynamicSidePanel/Panel_SectionList/ScrollRect_Navigation_Container/ScrollRect_Content/Viewport/VerticalLayoutGroup/Debug/ManageCachedData")?.gameObject) == null)
+            throw new NullReferenceException("MMBtnGRP Is Null!");
+        if ((MMCTgl = MMM?.transform.Find("Container/MMParent/Menu_Settings/Menu_MM_DynamicSidePanel/Panel_SectionList/ScrollRect_Navigation_Container/ScrollRect_Content/Viewport/VerticalLayoutGroup/Mirrors/PersonalMirror/Settings_Panel_1/VerticalLayoutGroup/PersonalMirror")?.gameObject) == null)
+            throw new NullReferenceException("MMCTgl Is Null!");
+        
+        GetToglSprites();
+        return (HasChecked = true);
     }
 
-    private static bool GetToglSprites() {
+    private static void GetToglSprites() {
         StyleEngine styleEngine = QuickMenu.GetComponent<StyleEngine>();
         var resources = styleEngine.field_Public_StyleResource_0.resources;
         for (int i = 0; i < resources.Count; i++) {
@@ -130,15 +85,8 @@ public class APIBase {
             if (OffSprite != null && OnSprite != null) break;
         }
 
-        if (OffSprite == null) {
-            Logs.Error("OffSprite Is Null!");
-            return false;
-        }
-        if (OnSprite == null) {
-            Logs.Error("OnSprite Is Null!");
-            return false;
-        }
-        return true;
+        if (OffSprite == null) throw new NullReferenceException("OffSprite Is Null!");
+        if (OnSprite == null) throw new NullReferenceException("OnSprite Is Null!");
     }
 
     internal static void SafelyInvolk(Action action, string name) { 

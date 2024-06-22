@@ -77,7 +77,7 @@ public class ToggleControl : Root {
         OffImage.gameObject.SetActive(!State);
 
         TMProCompnt.fontSize = FontSize;
-        TMProCompnt.transform.localPosition = new Vector3(34.5f, -22, 0);
+        TMProCompnt.transform.localPosition = new Vector3(34.5f, 33, 0);
         TMProCompnt.GetComponent<RectTransform>().sizeDelta = new Vector2(100f, 50f);
 
         gameObject.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(0, -80);

@@ -27,7 +27,7 @@ public class VRCLable : Root {
         TMProCompnt.fontSize = 38f;
         TMProCompnt.enableAutoSizing = true;
 
-        var Text2 = UnityEngine.Object.Instantiate(SButton.transform.Find("Text_H4").gameObject, new Vector3(0, -54.75f, 0), Quaternion.Euler(0, 0, 0), SButton.transform);
+        var Text2 = UnityEngine.Object.Instantiate(SButton.TMProCompnt.gameObject, new Vector3(0, -54.75f, 0), Quaternion.Euler(0, 0, 0), SButton.transform);
         Text2.transform.localPosition = new Vector3(0, -54.75f, 0);
         Text2.transform.localRotation = Quaternion.Euler(0, 0, 0);
         LowerTextUgui = Text2.GetComponent<TextMeshProUGUI>();

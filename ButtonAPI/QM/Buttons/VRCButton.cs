@@ -21,27 +21,33 @@ public class VRCButton : ExtentedControl {
         gameObject.SetActive(true);
 
         TMProCompnt = transform.GetComponentInChildren<TextMeshProUGUI>();
+        if (TMProCompnt == null)
+            throw new NullReferenceException("Unable to grab Text Object");
+
         TMProCompnt.text = text;
         TMProCompnt.richText = true;
         Text = text;
 
         ButtonCompnt = transform.GetComponent<Button>();
+        if (ButtonCompnt == null)
+            throw new NullReferenceException("Unable to grab Button Componet");
+
         ButtonCompnt.onClick = new();
         if (listener != null) SetAction(listener);
         else ButtonCompnt.interactable = false;
 
 
-        ImgCompnt = transform.transform.Find("Icon").GetComponent<Image>();
+        ImgCompnt = transform.transform.Find("Icons/Icon").GetComponent<Image>();
         var elemetn = ImgCompnt.gameObject.GetComponent<StyleElement>();
         if (elemetn != null) elemetn.enabled = false; // Fix the Images from going back to the default
         if (ImgCompnt.color == Color.black)
             ImgCompnt.color = Color.white;
 
-        Object.Destroy(transform.transform.Find("Icon_Secondary").gameObject);
+        Object.Destroy(transform.transform.Find("Icons/Icon_Secondary").gameObject);
         if (Icon != null) 
             SetSprite(Icon);
         else {
-            transform.transform.Find("Icon").gameObject.active = false;
+            transform.transform.Find("Icons/Icon").gameObject.active = false;
             ResetTextPox();
         }
 

@@ -21,14 +21,15 @@ public class VRCToggle : ToggleControl {
         OnToolTip ??= $"Turn Off {text.Replace("\n", string.Empty)}";
 
         if (ToggleTemplate == null) {
-            ToggleTemplate = new VRCButton(APIBase.ButtonGrp.transform, text, string.Empty, () => { }).transform;
+            var btn = new VRCButton(APIBase.ButtonGrp.transform, text, string.Empty, () => { });
+            ToggleTemplate = btn.transform;
 
             Object.DestroyImmediate(ToggleTemplate.GetComponent<Button>());
-            Object.DestroyImmediate(ToggleTemplate.Find("Icon_Secondary"));
+            Object.DestroyImmediate(ToggleTemplate.Find("Icons/Icon_Secondary"));
             Object.DestroyImmediate(ToggleTemplate.Find("Badge_Close"));
             Object.DestroyImmediate(ToggleTemplate.Find("Badge_MMJump"));
             ToggleTemplate.gameObject.AddComponent<Toggle>();
-            var defaultImageObj = ToggleTemplate.Find("Icon");
+            var defaultImageObj = btn.ImgCompnt.transform;
             defaultImageObj.name = "Icon_Off";
             var onImge = Object.Instantiate(defaultImageObj, defaultImageObj.parent);
             onImge.name = "Icon_On";
@@ -48,10 +49,10 @@ public class VRCToggle : ToggleControl {
         TMProCompnt.text = text;
         TMProCompnt.richText = true;
 
-        OnImage = gameObject.transform.Find("Icon_On").GetComponent<Image>();
-        OffImage = gameObject.transform.Find("Icon_Off").GetComponent<Image>();
-        OffImage.transform.localPosition = new Vector3(-46f, 43, 0);
-        OnImage.transform.localPosition = new Vector3(49, 55, 0);
+        OnImage = gameObject.transform.Find("Icons/Icon_On").GetComponent<Image>();
+        OffImage = gameObject.transform.Find("Icons/Icon_Off").GetComponent<Image>();
+        OffImage.transform.localPosition = new Vector3(-46f, 0, 0);
+        OnImage.transform.localPosition = new Vector3(49, 0, 0);
 
         Listener = listener;
         SoftSetState(DefaultState);

@@ -38,7 +38,7 @@ public class ExtentedControl : Root {
     }
 
 
-    internal void ResetTextPox() => gameObject.transform.Find("Text_H4").transform.localPosition = new Vector3(0, 0, 0);
+    internal void ResetTextPox() => TMProCompnt.transform.localPosition = new Vector3(0, 0, 0);
 
     public void TurnHalf(HalfType Type, bool IsGroup) {
         ImgCompnt.gameObject.active = false;
@@ -53,16 +53,16 @@ public class ExtentedControl : Root {
         switch (Type) {
             case HalfType.Top:
                 ImgCompnt.transform.localPosition = new Vector3(0f, 0f, 0f);
-                gameObject.transform.Find("Text_H4").transform.localPosition = new Vector3(0, 22, 0);
+                TMProCompnt.transform.localPosition = new Vector3(0, 77, 0);
                 gameObject.transform.Find("Background").localPosition = new Vector3(0, 53, 0);
                 break;
             case HalfType.Normal:
                 ImgCompnt.transform.localPosition = new Vector3(0f, 0f, 0f);
-                gameObject.transform.Find("Text_H4").transform.localPosition = new Vector3(0, -22, 0);
+                TMProCompnt.transform.localPosition = new Vector3(0, 33, 0);
                 break;
             case HalfType.Bottom:
                 ImgCompnt.transform.localPosition = new Vector3(0f, 0f, 0f);
-                gameObject.transform.Find("Text_H4").transform.localPosition = new Vector3(0, -69.9f, 0);
+                TMProCompnt.transform.localPosition = new Vector3(0, -91.9f, 0);
                 gameObject.transform.Find("Background").localPosition = new Vector3(0, -53, 0);
                 break;
         }
