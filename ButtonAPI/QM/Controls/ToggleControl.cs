@@ -69,16 +69,18 @@ public class ToggleControl : Root {
         IsHalf = true;
 
         OnImage.transform.localScale = new Vector3(0.85f, 0.85f, 0.85f);
-        OnImage.transform.localPosition = new Vector3(-52, 30, 0f);
+        OnImage.transform.localPosition = new Vector3(-52, -5, 0f);
         OnImage.gameObject.SetActive(State);
 
         OffImage.transform.localScale = new Vector3(0.85f, 0.85f, 0.85f);
-        OffImage.transform.localPosition = new Vector3(-52, 30, 0f);
+        OffImage.transform.localPosition = new Vector3(-52, -5, 0f);
         OffImage.gameObject.SetActive(!State);
 
         TMProCompnt.fontSize = FontSize;
         TMProCompnt.transform.localPosition = new Vector3(34.5f, 33, 0);
+        TMProCompnt.transform.parent.GetComponent<LayoutElement>().enabled = false;
         TMProCompnt.GetComponent<RectTransform>().sizeDelta = new Vector2(100f, 50f);
+
 
         gameObject.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = new Vector2(0, -80);
 

@@ -53,16 +53,16 @@ public class ExtentedControl : Root {
         switch (Type) {
             case HalfType.Top:
                 ImgCompnt.transform.localPosition = new Vector3(0f, 0f, 0f);
-                TMProCompnt.transform.localPosition = new Vector3(0, 77, 0);
+                TMProCompnt.transform.localPosition = new Vector3(0, 90, 0);
                 gameObject.transform.Find("Background").localPosition = new Vector3(0, 53, 0);
                 break;
             case HalfType.Normal:
                 ImgCompnt.transform.localPosition = new Vector3(0f, 0f, 0f);
-                TMProCompnt.transform.localPosition = new Vector3(0, 33, 0);
+                TMProCompnt.transform.localPosition = new Vector3(0, 35, 0);
                 break;
             case HalfType.Bottom:
                 ImgCompnt.transform.localPosition = new Vector3(0f, 0f, 0f);
-                TMProCompnt.transform.localPosition = new Vector3(0, -91.9f, 0);
+                TMProCompnt.transform.localPosition = new Vector3(0, -5, 0);
                 gameObject.transform.Find("Background").localPosition = new Vector3(0, -53, 0);
                 break;
         }

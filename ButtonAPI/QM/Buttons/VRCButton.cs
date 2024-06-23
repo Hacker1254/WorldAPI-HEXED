@@ -26,6 +26,7 @@ public class VRCButton : ExtentedControl {
 
         TMProCompnt.text = text;
         TMProCompnt.richText = true;
+
         Text = text;
 
         ButtonCompnt = transform.GetComponent<Button>();
